@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Make smarter inventory decisions using AI-driven demand forecasting">
+    <title>Smart Inventory Advisor - AI-Powered Inventory Decisions</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Smart Inventory Advisor</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#recommend">Get Recommendation</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Stop Guessing Your Inventory Needs</h1>
+                <p>Use AI forecasting to predict demand, factor in promotions and discounts, and order with confidence
+                </p>
+                <a href="#recommend" class="btn btn-primary">Try It Now</a>
+            </div>
+            <div class="hero-image">
+                <!-- REPLACE: Add your business owner photo here -->
+                <img src="images/hero-person.png" alt="Business Owner" class="floating-person">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Recommendation Section -->
+    <section id="recommend" class="section">
+        <div class="container">
+            <h2 class="text-center mb-lg">Try the Recommendation Tool</h2>
+            <p class="text-center" style="max-width: 600px; margin: 0 auto var(--space-2xl);">
+                Fill in your numbers below and we'll tell you what to order
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <form id="recommendForm">
+                        <!-- Yesterday's Sales -->
+                        <div class="form-group">
+                            <label class="form-label" for="yesterdaySales">Yesterday's Sales</label>
+                            <input type="number" id="yesterdaySales" class="form-input" placeholder="e.g., 5" value="5"
+                                min="0" required>
+                            <small
+                                style="color: var(--color-text-muted); font-size: var(--font-size-xs); display: block; margin-top: var(--space-xs);">
+                                How many units did you sell yesterday?
+                            </small>
+                        </div>
+
+                        <!-- Sales Trend -->
+                        <div class="form-group">
+                            <label class="form-label" for="salesTrend">Sales Trend</label>
+                            <select id="salesTrend" class="form-select" required>
+                                <option value="stable">Stable - Sales are consistent</option>
+                                <option value="increasing">Increasing - Sales are growing</option>
+                                <option value="decreasing">Decreasing - Sales are declining</option>
+                            </select>
+                            <small
+                                style="color: var(--color-text-muted); font-size: var(--font-size-xs); display: block; margin-top: var(--space-xs);">
+                                How have sales been trending over the past few weeks?
+                            </small>
+                        </div>
+
+                        <!-- Promotion Active -->
+                        <div class="form-group">
+                            <label class="form-label">Promotion Active</label>
+                            <div class="toggle-wrapper">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="promoActive" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label">Currently running a promotion</span>
+                            </div>
+                        </div>
+
+                        <!-- Discount Percentage Slider -->
+                        <div class="slider-wrapper">
+                            <div class="slider-header">
+                                <label class="form-label" for="discountSlider">Discount Percentage</label>
+                                <span class="slider-value" id="discountValue">20%</span>
+                            </div>
+                            <input type="range" id="discountSlider" class="range-slider" min="0" max="100" value="20"
+                                step="5">
+                            <small
+                                style="color: var(--color-text-muted); font-size: var(--font-size-xs); display: block; margin-top: var(--space-sm);">
+                                What discount are you offering?
+                            </small>
+                        </div>
+
+                        <!-- Risk Tolerance Slider -->
+                        <div class="slider-wrapper">
+                            <div class="slider-header">
+                                <label class="form-label" for="riskSlider">Risk Tolerance</label>
+                                <span class="slider-value" id="riskValue">80%</span>
+                            </div>
+                            <input type="range" id="riskSlider" class="range-slider" min="0" max="100" value="80"
+                                step="10">
+                            <small
+                                style="color: var(--color-text-muted); font-size: var(--font-size-xs); display: block; margin-top: var(--space-sm);">
+                                Higher = more aggressive (avoid stockouts), Lower = more conservative (avoid overstock)
+                            </small>
+                        </div>
+
+                        <!-- Advanced Settings (Collapsible) -->
+                        <div class="collapsible-section">
+                            <div class="collapsible-header" id="advancedToggle">
+                                <span class="collapsible-title">
+                                    <span>⚙️</span>
+                                    <span>Advanced Settings</span>
+                                </span>
+                                <svg class="collapsible-chevron" id="advancedChevron" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                            <div class="collapsible-content" id="advancedContent">
+                                <div class="form-group">
+                                    <label class="form-label">Special Events</label>
+                                    <div class="toggle-wrapper">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="festivalActive">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                        <span class="toggle-label">Festival or holiday period</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-xl);">
+                            Get AI Recommendation
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Area -->
+                <div id="resultsArea" class="mt-lg hidden">
+                    <!-- Loading State -->
+                    <div id="loadingState" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>Analyzing your data...</span>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="errorState" class="error-message hidden"></div>
+
+                    <!-- Decision Card -->
+                    <div id="decisionCard" class="decision-card hidden">
+                        <div class="decision-header">
+                            <span id="decisionBadge" class="decision-badge"></span>
+                            <div id="riskIndicator" class="risk-indicator">
+                                <span class="risk-dot"></span>
+                                <span id="riskText"></span>
+                            </div>
+                        </div>
+
+                        <div class="quantity-display">
+                            <span id="quantityValue"></span> <span
+                                style="font-size: var(--font-size-xl); color: var(--color-text-secondary);">units</span>
+                        </div>
+
+                        <div class="forecast-signal">
+                            <span class="signal-label">Forecast Signal:</span>
+                            <span id="forecastSignalText" class="signal-text"></span>
+                        </div>
+
+                        <div class="explanation">
+                            <strong style="color: var(--color-text-primary);">Explanation:</strong>
+                            <p id="explanationText" style="margin-top: var(--space-sm);"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <h2 class="text-center mb-lg">How It Works</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto var(--space-2xl);">
+                We look at your sales history, consider what's coming up (sales, holidays), and help you decide how much
+                to order based on how much risk you're comfortable with.
+            </p>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your analytics/chart icon image here -->
+                        <img src="images/Analytics_Icon.png" alt="Analytics Icon" class="icon-img">
+                    </div>
+                    <h3>Look at Past Sales</h3>
+                    <p>
+                        We analyze what you've sold recently to spot patterns. Are sales trending up? Down? Staying
+                        steady? This gives us a baseline for what to expect.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your target/events icon image here -->
+                        <img src="images/Events_Icon.png" alt="Events Icon" class="icon-img">
+                    </div>
+                    <h3>Factor in Events</h3>
+                    <p>
+                        Running a promotion? Holiday coming up? Offering a discount? These things change demand, so we
+                        adjust the forecast accordingly.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your growth/chart icon image here -->
+                        <img src="images/Growth_icon.png" alt="Growth Icon" class="icon-img">
+                    </div>
+                    <h3>Show the Range</h3>
+                    <p>
+                        Forecasts aren't perfect. We show you a confidence range—best case, worst case, and most
+                        likely—so you know what you're working with.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your balance/risk icon image here -->
+                        <img src="images/Balance_icon.png" alt="Balance Icon" class="icon-img">
+                    </div>
+                    <h3>Match Your Risk Style</h3>
+                    <p>
+                        Conservative? We'll recommend less to avoid overstock. Aggressive? We'll suggest more to capture
+                        every sale. You pick your comfort level.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your lightbulb/idea icon image here -->
+                        <img src="images/Idea_icon.png" alt="Idea Icon" class="icon-img">
+                    </div>
+                    <h3>Plain English Explanations</h3>
+                    <p>
+                        No jargon. Every recommendation comes with a clear explanation of why we're suggesting what
+                        we're
+                        suggesting.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- REPLACE: Add your rocket/speed icon image here -->
+                        <img src="images/Speed_Icon.png" alt="Speed Icon" class="icon-img">
+                    </div>
+                    <h3>Get Results Instantly</h3>
+                    <p>
+                        No waiting around. Enter your data, hit submit, and get a recommendation in seconds.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Smart Inventory Advisor &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
