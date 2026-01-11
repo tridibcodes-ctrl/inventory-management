@@ -2,10 +2,6 @@
 
 > **ML-powered, risk-aware inventory decision system combining demand forecasting with uncertainty modeling**
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A production-ready, full-stack application that improves stock availability while controlling inventory costs through machine learning-driven demand forecasting and uncertainty-aware decision making.
 
 ---
@@ -145,9 +141,6 @@ graph LR
     D --> E[Web Frontend<br/>S3 + CloudFront]
     E --> F[Business Users<br/>Inventory Decisions]
     
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 ### Development & Deployment Pipeline
